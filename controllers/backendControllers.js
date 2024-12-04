@@ -27,3 +27,23 @@ export async function getAllNotes(req, res) {
         return res.status(500).json({ message: "Error fetching notes", error });
     }
 }
+export async function deleteNote(req, res) {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ message: "Missing note ID" });
+    }
+
+    const command = "DELETE FROM notes WHERE id = ?";
+    const values = [id];
+
+    try {
+        const result = await query(command, values);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Note not found" });
+        }
+        return res.status(200).json({ message: "Note deleted successfully" });
+    } catch (error) {
+        return res.status(500).json({ message: "Error deleting note", error });
+    }
+}
