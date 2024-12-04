@@ -3,16 +3,14 @@ import { createNote, getAllNotes, deleteNote } from '../controllers/backendContr
 
 const router = express.Router();
 
-router.post('/notes', createNote);
+router.post('/create-notes', createNote);
 
-router.get('/notes', getAllNotes);
+router.get('/get-all-notes', getAllNotes);
 
+router.post("/del-notes", deleteNote);
 
+// router.get("/notes", getAllNotes);
 
-router.post("/notes", createNote);
-
-router.get("/notes", getAllNotes);
-
-router.delete("/notes/:id", deleteNote);
+// router.delete("/notes/:id", deleteNote);
 
 export default router;
