@@ -8,7 +8,7 @@ router.post('/notes', createNote);
 router.get('/notes', getAllNotes);
 
 
-
+//fakhriyyah//
 router.post("/notes", createNote);
 
 router.get("/notes", getAllNotes);
