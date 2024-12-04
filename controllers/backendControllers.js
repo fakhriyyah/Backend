@@ -27,7 +27,7 @@ export async function getAllNotes(req, res) {
         return res.status(500).json({ message: "Error fetching notes", error });
     }
 }
-//fakhriyyah//
+//fakhriyyah deletenote//
 export async function deleteNote(req, res) {
     const { id } = req.params;
 
