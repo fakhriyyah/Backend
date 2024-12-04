@@ -47,3 +47,14 @@ export async function deleteNote(req, res) {
         return res.status(500).json({ message: "Error deleting note", error });
     }
 }
+
+export async function getAllNotes(req, res) {
+    const command = "SELECT * FROM notes";
+    try {
+        const [rows] = await query(command);  
+        return res.status(200).json(rows);  
+    } catch (error) {
+        return res.status(500).json({ message: "Error fetching notes", error });
+    }
+  }
+  
