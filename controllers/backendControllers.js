@@ -1,0 +1,29 @@
+import { query } from "../database/db.js";
+
+export async function createNote(req, res) {
+    const { title, note, datetime } = req.body;
+
+    if (!title || !note || !datetime) {
+        return res.status(400).json({ message: "Missing fields" });
+    }
+
+    const command = "INSERT INTO notes (title, note, datetime) VALUES (?, ?, ?)";
+    const values = [title, note, datetime];
+
+    try {
+        await query(command, values);
+        return res.status(201).json({ message: "Note created successfully" });
+    } catch (error) {
+        return res.status(500).json({ message: "Error creating note", error });
+    }
+}
+
+export async function getAllNotes(req, res) {
+  const command = "SELECT * FROM notes";
+    try {
+        const [rows] = await query(command);
+        return res.status(200).json(rows);
+    } catch (error) {
+        return res.status(500).json({ message: "Error fetching notes", error });
+    }
+}

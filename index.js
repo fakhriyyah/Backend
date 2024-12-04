@@ -1,24 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
-import bodyParser from "body-parser";
+import backendRoutes from "./routes/backendRoutes.js";
 
 dotenv.config();
 
 const app = express();
-const port = process.env.APP_PORT;
+app.use(express.json());
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(backendRoutes);
 
-app.use("/");
-
-app.get("/", (req, res) => {
-  res.send(`server berjalan di ${port}`);
+const PORT = process.env.APP_PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server berjalan di port ${PORT}`);
 });
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-export default app;
