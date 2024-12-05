@@ -1,14 +1,20 @@
+import bodyParser from "body-parser";
 import { query } from "../database/db.js";
+import axios from "axios";
 
 export async function createNote(req, res) {
     const { title, note, datetime } = req.body;
+    console.log(title);
+    console.log(note);
+    console.log(datetime);
+    
 
     if (!title || !note || !datetime) {
         return res.status(400).json({ message: "Missing fields" });
     }
 
-    const command = "INSERT INTO notes (title, note, datetime) VALUES (?, ?, ?)";
-    const values = [title, note, datetime];
+    const command = "INSERT INTO notes (title, datetime, note) VALUES (?, ?, ?)";
+    const values = [title, datetime, note];
 
     try {
         await query(command, values);
@@ -27,6 +33,7 @@ export async function getAllNotes(req, res) {
         return res.status(500).json({ message: "Error fetching notes", error });
     }
 }
+
 //fakhriyyah deletenote//
 export async function deleteNote(req, res) {
     const { id } = req.params;
@@ -48,3 +55,14 @@ export async function deleteNote(req, res) {
         return res.status(500).json({ message: "Error deleting note", error });
     }
 }
+
+export async function getAllNotes(req, res) {
+    const command = "SELECT * FROM notes";
+    try {
+        const [rows] = await query(command);  
+        return res.status(200).json(rows);  
+    } catch (error) {
+        return res.status(500).json({ message: "Error fetching notes", error });
+    }
+  }
+  
