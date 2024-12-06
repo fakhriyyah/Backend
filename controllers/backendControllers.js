@@ -27,11 +27,6 @@ export const updateNote = async (req, res) => {
   const { noteID } = req.params;
   const { title, datetime, note } = req.body;
 
-    console.log(title);
-    console.log(datetime);
-    console.log(note);
-    console.log(noteID);
-
   try {
     const queryUpdate =
       "UPDATE notes SET title = ?, datetime = ?, note = ? WHERE id = ?";
