@@ -11,5 +11,6 @@ const pool = mysql.createPool({
 
 export const query = async (command, values = []) => {
     const [rows] = await pool.execute(command, values);
+    
     return rows;
 };

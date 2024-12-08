@@ -12,14 +12,10 @@ router.post("/create-notes", createNote);
 
 router.get("/get-all-notes", getAllNotes);
 
-router.post("/del-notes", deleteNote);
-
-//fakhriyyah deletenote//
-router.post("/notes", createNote);
-
 // Farkhan Roihan
 router.post("/update-notes/:noteID", updateNote);
 
+//fakhriyyah deletenote//
 router.delete("/notes/:id", deleteNote);
 
 export default router;

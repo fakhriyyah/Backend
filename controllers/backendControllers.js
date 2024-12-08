@@ -1,11 +1,9 @@
 import bodyParser from "body-parser";
 import { query } from "../database/db.js";
 
+// Ammar Alfaysyah
 export async function createNote(req, res) {
   const { title, note, datetime } = req.body;
-  console.log(title);
-  console.log(note);
-  console.log(datetime);
 
   if (!title || !note || !datetime) {
     return res.status(400).json({ message: "Missing fields" });
@@ -44,10 +42,11 @@ export const updateNote = async (req, res) => {
   }
 };
 
+// Saryal
 export async function getAllNotes(req, res) {
   const command = "SELECT * FROM notes";
   try {
-    const [rows] = await query(command);
+    const rows = await query(command);
     return res.status(200).json(rows);
   } catch (error) {
     return res.status(500).json({ message: "Error fetching notes", error });
@@ -76,12 +75,3 @@ export async function deleteNote(req, res) {
   }
 }
 
-// export async function getAllNotes(req, res) {
-//   const command = "SELECT * FROM notes";
-//   try {
-//     const [rows] = await query(command);
-//     return res.status(200).json(rows);
-//   } catch (error) {
-//     return res.status(500).json({ message: "Error fetching notes", error });
-//   }
-// }
