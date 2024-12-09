@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import { query } from "../database/db.js";
 
 // Ammar Alfaysyah
@@ -53,6 +52,22 @@ export async function getAllNotes(req, res) {
   }
 }
 
+// Farkhan
+export const getOneNote = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const getNote = "SELECT * FROM notes WHERE id = ?";
+
+    const result = await query(getNote, [id]);
+
+    res.json(result);
+  } catch (error) {
+    console.error("notes gagal diambil", error);
+    return res.status(500).json({ error: "gagal mengambil notes" });
+  }
+};
+
 //fakhriyyah deletenote//
 export async function deleteNote(req, res) {
   const { id } = req.params;
@@ -74,4 +89,3 @@ export async function deleteNote(req, res) {
     return res.status(500).json({ message: "Error deleting note", error });
   }
 }
-
